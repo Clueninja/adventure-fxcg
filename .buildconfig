@@ -1,0 +1,11 @@
+[default]
+name=Default
+runtime=host
+toolchain=gcc:/usr/bin/sh-elf-gcc
+config-opts=
+run-opts=
+prefix=/home/samb/.cache/gnome-builder/install/adventure/host
+app-id=
+postbuild=
+prebuild=
+default=true
