@@ -27,6 +27,18 @@ void get_xy_from_dir(struct Player *player, int *x, int *y){
     }
 }
 
+int check_player_killed(struct Player *player, struct Enemy *enemies){
+    for (int e=0; e<MAX_ENEMIES && player->running; e++){
+        if(!enemies[e].loaded) continue;
+        if (player->x == enemies[e].x && player->y == enemies[e].y){
+            player->running =0;
+        }
+    }
+    if (player->running) return 0;
+    game_over_screen ();
+    return 1;
+}
+
 
 void move_player(struct Player* player, int x,int y, struct Enemy* enemies){
     if (player->x +x <1 || player->x +x >21) return;
@@ -35,13 +47,7 @@ void move_player(struct Player* player, int x,int y, struct Enemy* enemies){
     if (levels[player->level][player->y+y-1][player->x+x+1]=='#')return;
     player->x +=x;
     player->y+=y;
-    // check if player touching enemy
-    for (int e=0; e<MAX_ENEMIES; e++){
-        if(!enemies[e].loaded) return;
-        if (player->x == enemies[e].x && player->y == enemies[e].y){
-            player->running =0;
-        }
-    }
+
 }
 
 int check_enemy_hit(int x,int y, struct Enemy* enemies){

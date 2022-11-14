@@ -14,6 +14,8 @@ struct Player{
 };
 #include "enemies.h"
 
+int check_player_killed(struct Player *,struct Enemy *);
+
 void move_player(struct Player *, int,int, struct Enemy *);
 
 void draw_player(struct Player *);

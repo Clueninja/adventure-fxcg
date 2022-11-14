@@ -7,7 +7,7 @@
 
 void draw_enemies(struct Enemy * enemies){
     for (int e=0; e<MAX_ENEMIES; e++){
-        if(enemies[e].x ==0 || enemies[e].y ==0) return;
+        if(!enemies[e].loaded) continue;
         PrintXY (enemies[e].x,enemies[e].y, "  X", 0, TEXT_COLOR_RED);
     }
 }
@@ -15,7 +15,7 @@ void draw_enemies(struct Enemy * enemies){
 int can_move(int new_x, int new_y, int level){
     if (new_x<1 || new_y<1) return 0;
     if (levels[level][new_y-1][new_x+1] == '#') return 0;
-     return 1;
+    return 1;
 }
 
 void move_enemies(struct Enemy * enemies, int level){
@@ -45,7 +45,7 @@ void move_enemies(struct Enemy * enemies, int level){
                 new_y = enemies[e].y-1;
                 break;
         }
-        if (can_move (new_x, new_y, 1)){
+        if (can_move (new_x, new_y, level)){
             enemies[e].x = new_x;
             enemies[e].y = new_y;
         }
