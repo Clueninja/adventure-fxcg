@@ -29,7 +29,7 @@ int main(){
             attack(&player, enemies);
         }
         player.attacking=0;
-        if (check_player_killed(&player, enemies)) return 0;
+
         move_enemies (enemies, player.level);
         draw_enemies (enemies);
         draw_player(&player);
@@ -59,9 +59,10 @@ int main(){
                 player.running=0;
                 break;
         }
+        if (check_player_killed(&player, enemies)) return 0;
         if (check_level_end(&player)){
             player.level+=1;
-            if (player.level<NUM_LEVELS){game_won_screen(); return 0;}
+            if (player.level==NUM_LEVELS){game_won_screen(); return 0;}
             if (load_level (&player, enemies)) return 0;
         }
     }

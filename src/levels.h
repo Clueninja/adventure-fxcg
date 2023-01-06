@@ -3,7 +3,7 @@
 #ifndef LEVELS_H
 #define LEVELS_H
 
-#define NUM_LEVELS 2
+#define NUM_LEVELS 3
 
 #include "player.h"
 #include "enemies.h"
