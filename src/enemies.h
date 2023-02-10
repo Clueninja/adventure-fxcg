@@ -13,9 +13,10 @@ struct Enemy{
 
 
 #include "player.h"
+// Draws Enemies on the screen
 void draw_enemies(struct Enemy *);
-
+// Moves the Enemies if possible
 void move_enemies(struct Enemy *, int);
-
+// loads the enemies from a level that is stored in the Player
 void load_enemies(struct Player *,struct Enemy *);
 #endif

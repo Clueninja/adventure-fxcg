@@ -18,24 +18,30 @@ int main(){
     struct Player player;
     player.running=1;
     player.level=0;
-
+    // quit if the load fails
     if (load_level (&player, enemies)) return 0;
-
+    // buffer to store the key press
     int key;
+
+    // main game loop
     while(player.running){
+        // draw the background for the level
         draw_level(player.level);
         //TODO: Find the correct order for these to happen
         if (player.attacking){
             attack(&player, enemies);
         }
         player.attacking=0;
-
+        // move and draw the enemies
         move_enemies (enemies, player.level);
         draw_enemies (enemies);
+        // draw the player
         draw_player(&player);
+        // blocking wait on a key press
         GetKey(&key);
         switch(key)
         {
+            // handle movement controls
             case KEY_CTRL_UP:
                 move_player (&player, 0, -1, enemies);
                 player.dir = Up;
@@ -52,9 +58,11 @@ int main(){
                 move_player (&player, 0, 1,enemies);
                 player.dir = Down;
                 break;
+            // handle attacking
             case KEY_CHAR_7:
                 player.attacking=1;
                 break;
+            // handle exiting the game
             case KEY_CTRL_EXE:
                 player.running=0;
                 break;

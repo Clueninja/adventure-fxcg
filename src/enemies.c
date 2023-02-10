@@ -15,9 +15,10 @@ void draw_enemies(struct Enemy * enemies){
 int can_move(int new_x, int new_y, int level){
     if (new_x<1 || new_y<1) return 0;
     if (levels[level][new_y-1][new_x+1] == '#') return 0;
+    // currently no way to check if an enemy is already at the position
     return 1;
 }
-
+// level is passed in instead of Player * because inconsistancy is great
 void move_enemies(struct Enemy * enemies, int level){
 
     for (int e=0; e<MAX_ENEMIES; e++)
@@ -25,7 +26,7 @@ void move_enemies(struct Enemy * enemies, int level){
         if (!enemies[e].loaded) continue;
         int new_x = 0;
         int new_y = 0;
-        int r = sys_rand ();
+        int r = sys_rand();
         switch (r%4){
             case 0:
                 new_x = enemies[e].x +1;
@@ -51,7 +52,7 @@ void move_enemies(struct Enemy * enemies, int level){
         }
     }
 }
-// Player does not need to be passed in
+// Player only needs to be passed in for the level number
 void load_enemies(struct Player *player , struct Enemy * enemies){
     for (int e=0; e<MAX_ENEMIES; e++){
         enemies[e].loaded=0;
